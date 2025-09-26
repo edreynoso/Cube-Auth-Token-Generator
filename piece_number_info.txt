@@ -1,0 +1,37 @@
+Center Piece Numbers:
+    White-0
+    Green-1
+    Orange-2
+    Blue-3
+    Red-4
+    Yellow-5
+
+Edge Piece Numbers:
+    White + Green-
+    White + Orange- 
+    White + Blue-
+    White + Red-
+
+    Green + Orange-
+    Green + Red-
+    Green + Yellow-
+
+    Orange + Blue-
+    Orange + Yellow-
+
+    Blue + Red-
+    Blue + Yellow-
+
+    Red + Yellow-
+
+Corner Piece Numbers:
+    White + Green + Orange- 
+    White + Green + Red-
+    White + Blue + Red-
+    White + Blue + Orange-
+
+    Yellow + Green + Orange-
+    Yellow + Green + Red-
+    Yellow + Blue + Red-
+    Yellow + Blue + Orange-
+
