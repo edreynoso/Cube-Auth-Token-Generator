@@ -1,19 +1,12 @@
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-
 public class CubeFace {
 
     // Add one custom graph per cube face
     //Possibly number each face of the cube
     //3x3 matrix representing the Rubik's Cube
     //Hashmap implementation might be better speed wise, but harder to visualize
-    private CubePiece[][] face = new CubePiece[3][3];
+    private CubePiece[][] face;
 
     private static final int CUBESIZE = 3;
-    private static final int PIECECOUNT = 26;
     private Color centerColor;
 
     public CubeFace(CubePiece[][] face, Color centerColor) {
@@ -37,7 +30,7 @@ public class CubeFace {
     public Color getCenterColor(){return this.centerColor;}
 
     public CubePiece get(int r, int c) {
-        return face[r][c];   // assuming your internal storage is CubePiece[][] face
+        return face[r][c];
     }
 
 
@@ -71,16 +64,10 @@ public class CubeFace {
         }
     }
     public void rotateCW(){
-        CubePiece[][] temp = new CubePiece[3][3];
+        CubePiece[][] temp = new CubePiece[CUBESIZE][CUBESIZE];
         for (int r = 0; r < CUBESIZE; r++)
             for (int c = 0; c < CUBESIZE; c++)
                 temp[c][2 - r] = face[r][c];
         face = temp;
-    }
-
-    public void rotateCCW(){
-        for(int i=0; i<3; i++){
-            rotateCW();
-        }
     }
 }

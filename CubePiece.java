@@ -1,6 +1,3 @@
-
-import java.util.ArrayList;
-
 public abstract class CubePiece {
 
     // Certain pieces in cube carry different weights

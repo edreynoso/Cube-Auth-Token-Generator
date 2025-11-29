@@ -1,13 +1,10 @@
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Collections;
-
-import static java.util.Collections.copy;
 
 public class Main {
 
-    public static final int SCRAMBLE_COUNT = 10000000;
+    public static final int SCRAMBLE_COUNT = 5000000;
 
     public static final int CUBESIZE = 3;
 
@@ -105,7 +102,7 @@ public class Main {
 
 
         CubeFace[] sides = {green, red, blue, orange, white, yellow};
-        Cube cube = new Cube(sides, sides);
+        Cube cube = new Cube(sides);
 
         return cube;
     }
@@ -113,7 +110,7 @@ public class Main {
     public static void main(String[] args) {
         Set<String> tokens = new HashSet<>();
 
-        ArrayList<String> scramble = new ArrayList<>();
+        ArrayList<String> scramble;
 
         Set<String> scrambles = new HashSet<>();
 

@@ -36,7 +36,7 @@ public class Cube {
 
     private static final String[] MODIFIERS = {"", "'", "2"};
 
-    public Cube(CubeFace[] face, CubeFace[] copy) {
+    public Cube(CubeFace[] face) {
         this.face = copy(face);
         this.solved = copy(face);
     }
@@ -247,7 +247,7 @@ public class Cube {
 
         for (CubeFace face : this.face) {
             String k = face.face_stringify();
-            cubeString.append(k).append("|");
+            cubeString.append(k);
         }
 
         return hashCube(cubeString.toString());

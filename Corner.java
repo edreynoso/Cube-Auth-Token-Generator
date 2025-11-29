@@ -1,6 +1,3 @@
-
-import java.util.ArrayList;
-
 public class Corner extends CubePiece {
 
     private final Color[] cornerColors = new Color[3];
@@ -13,8 +10,4 @@ public class Corner extends CubePiece {
         cornerColors[2] = c3;
     }
 
-
-    public Color[] getCornerColors() {
-        return cornerColors;
-    }
 }

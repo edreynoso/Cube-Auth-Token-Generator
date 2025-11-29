@@ -1,6 +1,3 @@
-
-import java.util.ArrayList;
-
 public class Edge extends CubePiece {
 
     private final Color[] edgeColors = new Color[2];
@@ -12,7 +9,4 @@ public class Edge extends CubePiece {
         edgeColors[1] = c2;
     }
 
-    public Color[] getEdgeColors(){
-        return edgeColors;
-    }
 }
