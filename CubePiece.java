@@ -11,12 +11,10 @@ public abstract class CubePiece {
 
     //Colors will be a list for simplicity as corners and edges have multiple colors 
     //This is for simplicity and also for face lookup    
-    private ArrayList<? extends CubePiece> adjacencyList;
 
-    public CubePiece(int weight, int piece_number, ArrayList<? extends CubePiece> adjacency_list) {
+    public CubePiece(int weight, int piece_number) {
         this.weight = weight;
         this.piece_number = piece_number;
-        this.adjacencyList = adjacency_list;
     }
 
     public int getWeight() {
@@ -26,9 +24,5 @@ public abstract class CubePiece {
     public int getPieceNumber() {
         return this.piece_number;
     }
-
-    public abstract ArrayList<? extends CubePiece> getAdjacentPieces();
-
-    public abstract void setAdjacentPieces(ArrayList<? extends CubePiece> update);
 
 }
