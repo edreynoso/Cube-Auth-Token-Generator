@@ -1,3 +1,6 @@
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 public class Cube {
 
@@ -23,19 +26,44 @@ public class Cube {
     private static final int UP = 0;
     private static final int DOWN = 2;
 
+    private static final int TOKENLENGTH = 6;
+
     private CubeFace[] face = new CubeFace[6];
+
+    private CubeFace[] solved = new CubeFace[6];
 
     private static final String[] MOVES = {"U", "R", "L", "F", "B", "D"};
 
     private static final String[] MODIFIERS = {"", "'", "2"};
 
-    public Cube(CubeFace[] face) {
-        this.face = face;
+    public Cube(CubeFace[] face, CubeFace[] copy) {
+        this.face = copy(face);
+        this.solved = copy(face);
     }
 
+    private CubeFace[] copy(CubeFace[] src){
+        CubeFace[] dupe = new CubeFace[src.length];
 
-    public Cube() {
+        for(int i= 0 ; i < 6; i++){
+            dupe[i] = copyPieces(src[i]);
+        }
+
+        return dupe;
     }
+
+    private CubeFace copyPieces(CubeFace src){
+        CubePiece[][] dupe = new CubePiece[CubePiece.CUBESIZE][CubePiece.CUBESIZE];
+
+        for (int i =0; i <CubePiece.CUBESIZE; i++){
+            for(int j = 0; j <CubePiece.CUBESIZE; j++){
+                dupe[i][j] = src.get(i,j);
+            }
+        }
+
+        return new CubeFace(dupe, src.getCenterColor());
+    }
+
+    public void reset(){this.face = copy(this.solved);}
 
     public CubeFace[] getFace(){return this.face;}
 
@@ -215,18 +243,39 @@ public class Cube {
 
 
     public String getToken() {
-        StringBuilder token = new StringBuilder();
-
-        ArrayList<String> cubeScramble = generateScramble();
-
-        this.scramble(cubeScramble);
+        StringBuilder cubeString = new StringBuilder();
 
         for (CubeFace face : this.face) {
-            String k = face.hash_face(face);
-            token.append(k);
+            String k = face.face_stringify();
+            cubeString.append(k).append("|");
         }
 
+        return hashCube(cubeString.toString());
+    }
+
+    private static String toAsciiToken(byte[] hash) {
+        StringBuilder token = new StringBuilder();
+        for (int i =0; i < TOKENLENGTH; i++){
+            int val = hash[i] & 0xFF;
+            int ascii = 33 + (val % 94);
+            token.append((char) ascii);
+        }
         return token.toString();
+    }
+
+    //Hash each side of the Cube, for a token of length 6
+    private String hashCube(String cube) {
+        //Take scrambled graph and create hash algo based on node weights
+
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(cube.getBytes(StandardCharsets.UTF_8));
+
+            return toAsciiToken(hash);
+        }catch(NoSuchAlgorithmException e){
+            System.out.println("Failed to use SHA_256");
+            return "";
+        }
     }
 
     public ArrayList<String> generateScramble() {

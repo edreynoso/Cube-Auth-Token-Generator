@@ -9,6 +9,8 @@ public abstract class CubePiece {
     // Pieces will have unique piece numbers
     private final int piece_number;
 
+    public static final int CUBESIZE = 3;
+
     //Colors will be a list for simplicity as corners and edges have multiple colors 
     //This is for simplicity and also for face lookup    
 

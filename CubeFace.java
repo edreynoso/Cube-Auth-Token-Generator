@@ -1,6 +1,8 @@
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class CubeFace {
 
@@ -19,42 +21,17 @@ public class CubeFace {
         this.centerColor = centerColor;
     }
 
-    private String face_stringify(){
+    public String face_stringify(){
         StringBuilder s = new StringBuilder();
+
         for (int i =0; i < CUBESIZE; i++){
             for (int j = 0; j < CUBESIZE; j++){
-                int x = this.face[i][j].getWeight() + this.face[i][j].getPieceNumber()
-                        / (((int) Math.random() * PIECECOUNT) +1);
-                s.append(x);
+                int x = this.face[i][j].getWeight() * this.face[i][j].getPieceNumber();
+                s.append(x).append(",");
             }
         }
+
         return s.toString();
-    }
-
-    public static String toAsciiToken(byte[] hash) {
-        StringBuilder token = new StringBuilder();
-
-        int val = hash[1] & 0xFF;   // convert signed → unsigned
-        int ascii = 33 + (val % 94); // printable ASCII (33–126)
-        token.append((char) ascii);
-
-
-        return token.toString();
-    }
-
-    //Hash each side of the Cube, for a token of length 6
-    public String hash_face(CubeFace cube) {
-        //Take scrambled graph and create hash algo based on node weights
-
-        try{
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(face_stringify().getBytes(StandardCharsets.UTF_8));
-
-            return toAsciiToken(hash);
-        }catch(NoSuchAlgorithmException e){
-            System.out.println("Failed to use SHA_256");
-            return "";
-        }
     }
 
     public Color getCenterColor(){return this.centerColor;}
