@@ -12,7 +12,7 @@ public class Edge extends CubePiece {
         edgeColors[1] = c2;
     }
 
-    public getEdgeColors(){
+    public Color[] getEdgeColors(){
         return edgeColors;
     }
 }

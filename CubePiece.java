@@ -25,4 +25,6 @@ public abstract class CubePiece {
         return this.piece_number;
     }
 
+
+
 }
