@@ -28,6 +28,8 @@ public class Cube {
 
     private static final int TOKENLENGTH = 6;
 
+    private static final int SCRAMBLELENGTH = 25;
+
     private CubeFace[] face = new CubeFace[6];
 
     private CubeFace[] solved = new CubeFace[6];
@@ -263,9 +265,7 @@ public class Cube {
         return token.toString();
     }
 
-    //Hash each side of the Cube, for a token of length 6
     private String hashCube(String cube) {
-        //Take scrambled graph and create hash algo based on node weights
 
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -274,6 +274,7 @@ public class Cube {
             return toAsciiToken(hash);
         }catch(NoSuchAlgorithmException e){
             System.out.println("Failed to use SHA_256");
+            System.out.println(e);
             return "";
         }
     }
@@ -284,7 +285,7 @@ public class Cube {
 
         String last_move = "P";
 
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < SCRAMBLELENGTH; i++) {
             String move = "";
 
             do {
@@ -298,7 +299,6 @@ public class Cube {
             if (move.charAt(0) != last_move.charAt(0)) {
                 scramble.add(move);
                 last_move = move;
-                //System.out.println(last_move);
             }
         }
         return scramble;

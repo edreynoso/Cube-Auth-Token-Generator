@@ -123,15 +123,9 @@ public class Main {
             String s = String.join(" ", scramble);
             if (scrambles.contains(s)) duplicateScrambles++;
             else scrambles.add(s);
-        }
-
-
-        for(int i =0; i < SCRAMBLE_COUNT; i++){
-
-            scramble = cube.generateScramble();
             cube.scramble(scramble);
             String t = cube.getToken();
-            if (tokens.contains(t)) duplicateTokens++;
+            if(tokens.contains(t)) duplicateTokens++;
             else tokens.add(t);
             cube.reset();
         }
@@ -164,13 +158,13 @@ public class Main {
 
         Cube cube = setUp(); //Sets up cube using 6 3x3 matricies with set piece numbers and weights
 
-        //printCube(cube); //Prints the unscrambled cube represented with piece numbers
+        printCube(cube); //Prints the unscrambled cube represented with piece numbers
 
-        //demo(cube); //Will generate one scramble, then print it and print the scrambed cube
+        demo(cube); //Will generate one scramble, then print it and print the scrambed cube
 
         duplicateChecker(cube); //Will check for duplicate scrambles and tokens based on a set number of iterations
 
-        //demoToken(cube); //will print one token generated from the cube
+        demoToken(cube); //will print one token generated from the cube
 
     }
 }
