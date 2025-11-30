@@ -7,7 +7,7 @@ public class CubeFace {
     private CubePiece[][] face;
 
     private static final int CUBESIZE = 3;
-    private Color centerColor;
+    private final Color centerColor;
 
     public CubeFace(CubePiece[][] face, Color centerColor) {
         this.face = face;
@@ -63,6 +63,7 @@ public class CubeFace {
             this.face[i][c] = col[i];
         }
     }
+
     public void rotateCW(){
         CubePiece[][] temp = new CubePiece[CUBESIZE][CUBESIZE];
         for (int r = 0; r < CUBESIZE; r++)

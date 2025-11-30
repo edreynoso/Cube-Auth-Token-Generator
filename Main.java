@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class Main {
 
-    public static final int SCRAMBLE_COUNT = 5000000;
+    public static final int SCRAMBLE_COUNT = 1000000;
 
     public static final int CUBESIZE = 3;
 
@@ -107,25 +107,14 @@ public class Main {
         return cube;
     }
 
-    public static void main(String[] args) {
-        Set<String> tokens = new HashSet<>();
-
-        ArrayList<String> scramble;
-
-        Set<String> scrambles = new HashSet<>();
-
-        Cube cube = setUp();
-        //scramble = cube.generateScramble();
-
-        //printCube(cube);
-        //System.out.println(scramble);
-        //cube.scramble(scramble);
-        String token = cube.getToken();
-        System.out.println(token);
-        //printCube(cube);
+    public static void duplicateChecker(Cube cube){
 
         int duplicateScrambles = 0;
         int duplicateTokens = 0;
+        ArrayList<String> scramble;
+
+        Set<String> scrambles = new HashSet<>();
+        Set<String> tokens = new HashSet<>();
 
 
         for (int i = 0; i < SCRAMBLE_COUNT; i++) {
@@ -151,6 +140,37 @@ public class Main {
                 +duplicateScrambles + " duplicate scambles");
         System.out.println("In " +SCRAMBLE_COUNT + " different tokens generated, there was "
                 + duplicateTokens+ " duplicate tokens");
+    }
+
+    public static void demo(Cube cube){
+        ArrayList<String> scramble;
+
+        scramble = cube.generateScramble();
+        System.out.println(scramble);
+
+        cube.scramble(scramble);
+        printCube(cube);
+        cube.reset();
+    }
+
+    public static void demoToken(Cube cube){
+        cube.scramble(cube.generateScramble());
+
+        System.out.println(cube.getToken());
+        cube.reset();
+    }
+
+    public static void main(String[] args) {
+
+        Cube cube = setUp(); //Sets up cube using 6 3x3 matricies with set piece numbers and weights
+
+        //printCube(cube); //Prints the unscrambled cube represented with piece numbers
+
+        //demo(cube); //Will generate one scramble, then print it and print the scrambed cube
+
+        duplicateChecker(cube); //Will check for duplicate scrambles and tokens based on a set number of iterations
+
+        //demoToken(cube); //will print one token generated from the cube
 
     }
 }
