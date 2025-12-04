@@ -1,19 +1,22 @@
-public abstract class CubePiece {
+
+public class CubePiece {
 
     // Certain pieces in cube carry different weights
     private final int weight;
 
     // Pieces will have unique piece numbers
-    private final int piece_number;
+    private final int pieceNumber;
+
+    private final Color pieceColor;
 
     public static final int CUBESIZE = 3;
 
     //Colors will be a list for simplicity as corners and edges have multiple colors 
     //This is for simplicity and also for face lookup    
-
-    public CubePiece(int weight, int piece_number) {
+    public CubePiece(int weight, int pieceNumber, Color pieceColor) {
+        this.pieceColor = pieceColor;
         this.weight = weight;
-        this.piece_number = piece_number;
+        this.pieceNumber = pieceNumber;
     }
 
     public int getWeight() {
@@ -21,9 +24,11 @@ public abstract class CubePiece {
     }
 
     public int getPieceNumber() {
-        return this.piece_number;
+        return this.pieceNumber;
     }
 
-
+    public Color getPieceColor() {
+        return this.pieceColor;
+    }
 
 }
