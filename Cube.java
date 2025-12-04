@@ -1,7 +1,9 @@
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+
 public class Cube {
 
     //Array of length 6, containing all the cube faces
@@ -13,7 +15,6 @@ public class Cube {
         4 = White
         5 = Yellow
      */
-
     private static final int GREEN = 0;
     private static final int RED = 1;
     private static final int BLUE = 2;
@@ -34,71 +35,127 @@ public class Cube {
 
     private CubeFace[] solved = new CubeFace[6];
 
-    private static final String[] MOVES = {"U", "R", "L", "F", "B", "D"};
-
-    private static final String[] MODIFIERS = {"", "'", "2"};
+    private static final String[] MOVES = {"U", "U2", "U'", "R", "R2", "R'", "L", "L2", "L'", "F", "F2", "F'", "B", "B2", "B'", "D", "D'", "D2"};
 
     public Cube(CubeFace[] face) {
         this.face = copy(face);
         this.solved = copy(face);
     }
 
-    private CubeFace[] copy(CubeFace[] src){
+    private CubeFace[] copy(CubeFace[] src) {
         CubeFace[] dupe = new CubeFace[src.length];
 
-        for(int i= 0 ; i < 6; i++){
+        for (int i = 0; i < 6; i++) {
             dupe[i] = copyPieces(src[i]);
         }
 
         return dupe;
     }
 
-    private CubeFace copyPieces(CubeFace src){
+    private CubeFace copyPieces(CubeFace src) {
         CubePiece[][] dupe = new CubePiece[CubePiece.CUBESIZE][CubePiece.CUBESIZE];
 
-        for (int i =0; i <CubePiece.CUBESIZE; i++){
-            for(int j = 0; j <CubePiece.CUBESIZE; j++){
-                dupe[i][j] = src.get(i,j);
+        for (int i = 0; i < CubePiece.CUBESIZE; i++) {
+            for (int j = 0; j < CubePiece.CUBESIZE; j++) {
+                dupe[i][j] = src.get(i, j);
             }
         }
 
         return new CubeFace(dupe, src.getCenterColor());
     }
 
-    public void reset(){this.face = copy(this.solved);}
+    public void reset() {
+        this.face = copy(this.solved);
+    }
 
-    public CubeFace[] getFace(){return this.face;}
+    public CubeFace[] getFace() {
+        return this.face;
+    }
 
     public void scramble(ArrayList<String> scramble) {
         //Scramble the cube using a custom
 
-        for (String move: scramble){
+        for (String move : scramble) {
             //System.out.println(move);
-            switch(move){
-                case "R":right(); break;
-                case "R'": right(); right(); right(); break;
-                case "R2": right(); right(); break;
-                case "L": left(); break;
-                case "L'": left(); left(); left(); break;
-                case "L2": left(); left(); break;
-                case "U": up(); break;
-                case "U'": up(); up(); up(); break;
-                case "U2": up(); up(); break;
-                case "D": down(); break;
-                case "D2": down(); down(); break;
-                case "D'": down(); down(); down();break;
-                case "F": front(); break;
-                case "F2": front(); front(); break;
-                case "F'": front(); front(); front(); break;
-                case "B": back(); break;
-                case "B2": back(); back(); break;
-                case "B'": back(); back(); back(); break;
+            switch (move) {
+                case "R":
+                    right();
+                    break;
+                case "R'":
+                    right();
+                    right();
+                    right();
+                    break;
+                case "R2":
+                    right();
+                    right();
+                    break;
+                case "L":
+                    left();
+                    break;
+                case "L'":
+                    left();
+                    left();
+                    left();
+                    break;
+                case "L2":
+                    left();
+                    left();
+                    break;
+                case "U":
+                    up();
+                    break;
+                case "U'":
+                    up();
+                    up();
+                    up();
+                    break;
+                case "U2":
+                    up();
+                    up();
+                    break;
+                case "D":
+                    down();
+                    break;
+                case "D2":
+                    down();
+                    down();
+                    break;
+                case "D'":
+                    down();
+                    down();
+                    down();
+                    break;
+                case "F":
+                    front();
+                    break;
+                case "F2":
+                    front();
+                    front();
+                    break;
+                case "F'":
+                    front();
+                    front();
+                    front();
+                    break;
+                case "B":
+                    back();
+                    break;
+                case "B2":
+                    back();
+                    back();
+                    break;
+                case "B'":
+                    back();
+                    back();
+                    back();
+                    break;
             }
         }
 
     }
 
-    public void right(){
+    public void right() {
 
         CubeFace greenFace = face[GREEN];
         CubeFace redFace = face[RED];
@@ -111,7 +168,6 @@ public class Cube {
         CubePiece[] yCol = yellowFace.getCol(RIGHT);
         CubePiece[] bCol = blueFace.getCol(RIGHT);
 
-
         whiteFace.setCol(RIGHT, gCol);
         blueFace.setCol(RIGHT, wCol);
         yellowFace.setCol(RIGHT, bCol);
@@ -121,8 +177,7 @@ public class Cube {
 
     }
 
-
-    public void left(){
+    public void left() {
         CubeFace greenFace = face[GREEN];
         CubeFace orangeFace = face[ORANGE];
         CubeFace blueFace = face[BLUE];
@@ -133,7 +188,6 @@ public class Cube {
         CubePiece[] wCol = whiteFace.getCol(LEFT);
         CubePiece[] yCol = yellowFace.getCol(LEFT);
         CubePiece[] bCol = blueFace.getCol(LEFT);
-
 
         whiteFace.setCol(LEFT, bCol);
         blueFace.setCol(LEFT, yCol);
@@ -166,8 +220,7 @@ public class Cube {
         whiteFace.rotateCW();
     }
 
-
-    public void down(){
+    public void down() {
         CubeFace greenFace = face[GREEN];
         CubeFace redFace = face[RED];
         CubeFace blueFace = face[BLUE];
@@ -190,7 +243,7 @@ public class Cube {
         yellowFace.rotateCW();
     }
 
-    public void front(){
+    public void front() {
         /*
             orange = right col
             white = bottom row
@@ -220,7 +273,7 @@ public class Cube {
         greenFace.rotateCW();
     }
 
-    public void back(){
+    public void back() {
         CubeFace blueFace = face[BLUE];
         CubeFace redFace = face[RED];
         CubeFace yellowFace = face[YELLOW];
@@ -243,7 +296,6 @@ public class Cube {
         blueFace.rotateCW();
     }
 
-
     public String getToken() {
         StringBuilder cubeString = new StringBuilder();
 
@@ -257,7 +309,7 @@ public class Cube {
 
     private static String toAsciiToken(byte[] hash) {
         StringBuilder token = new StringBuilder();
-        for (int i =0; i < TOKENLENGTH; i++){
+        for (int i = 0; i < TOKENLENGTH; i++) {
             int val = hash[i] & 0xFF;
             int ascii = 33 + (val % 94);
             token.append((char) ascii);
@@ -267,12 +319,12 @@ public class Cube {
 
     private String hashCube(String cube) {
 
-        try{
+        try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hash = md.digest(cube.getBytes(StandardCharsets.UTF_8));
 
             return toAsciiToken(hash);
-        }catch(NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             System.out.println("Failed to use SHA_256");
             System.out.println(e);
             return "";
@@ -283,7 +335,7 @@ public class Cube {
 
         ArrayList<String> scramble = new ArrayList<>();
 
-        String last_move = "P";
+        String last_move = "";
 
         for (int i = 0; i < SCRAMBLELENGTH; i++) {
             String move = "";
@@ -293,10 +345,7 @@ public class Cube {
                 move = MOVES[idx];
             } while (move.equals(last_move));
 
-            int idx = (int) (Math.random() * MODIFIERS.length);
-            String mod = MODIFIERS[idx];
-            move = move + mod;
-            if (move.charAt(0) != last_move.charAt(0)) {
+            if (!move.equals(last_move)) {
                 scramble.add(move);
                 last_move = move;
             }

@@ -1,4 +1,6 @@
+
 public class CubeFace {
+
     private CubePiece[][] face;
 
     private static final int CUBESIZE = 3;
@@ -9,11 +11,11 @@ public class CubeFace {
         this.centerColor = centerColor;
     }
 
-    public String face_stringify(){
+    public String face_stringify() {
         StringBuilder s = new StringBuilder();
 
-        for (int i =0; i < CUBESIZE; i++){
-            for (int j = 0; j < CUBESIZE; j++){
+        for (int i = 0; i < CUBESIZE; i++) {
+            for (int j = 0; j < CUBESIZE; j++) {
                 int x = this.face[i][j].getWeight() * this.face[i][j].getPieceNumber();
                 s.append(x).append(",");
             }
@@ -22,48 +24,51 @@ public class CubeFace {
         return s.toString();
     }
 
-    public Color getCenterColor(){return this.centerColor;}
+    public Color getCenterColor() {
+        return this.centerColor;
+    }
 
     public CubePiece get(int r, int c) {
         return face[r][c];
     }
 
-
-    public CubePiece[] getRow(int r){
+    public CubePiece[] getRow(int r) {
         CubePiece[] row = new CubePiece[CUBESIZE];
-        for(int i =0; i< CUBESIZE; i++){
+        for (int i = 0; i < CUBESIZE; i++) {
             row[i] = this.face[r][i];
         }
 
         return row;
     }
 
-    public CubePiece[] getCol(int c){
+    public CubePiece[] getCol(int c) {
         CubePiece[] col = new CubePiece[CUBESIZE];
-        for(int i =0; i < CUBESIZE; i++){
+        for (int i = 0; i < CUBESIZE; i++) {
             col[i] = this.face[i][c];
         }
 
         return col;
     }
 
-    public void setRow(int r, CubePiece[] row){
-        for(int i =0; i <CUBESIZE; i++){
+    public void setRow(int r, CubePiece[] row) {
+        for (int i = 0; i < CUBESIZE; i++) {
             this.face[r][i] = row[i];
         }
     }
 
-    public void setCol(int c, CubePiece[] col){
-        for(int i =0; i < CUBESIZE; i++){
+    public void setCol(int c, CubePiece[] col) {
+        for (int i = 0; i < CUBESIZE; i++) {
             this.face[i][c] = col[i];
         }
     }
 
-    public void rotateCW(){
+    public void rotateCW() {
         CubePiece[][] temp = new CubePiece[CUBESIZE][CUBESIZE];
-        for (int r = 0; r < CUBESIZE; r++)
-            for (int c = 0; c < CUBESIZE; c++)
+        for (int r = 0; r < CUBESIZE; r++) {
+            for (int c = 0; c < CUBESIZE; c++) {
                 temp[c][2 - r] = face[r][c];
+            }
+        }
         face = temp;
     }
 }

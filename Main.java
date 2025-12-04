@@ -16,7 +16,7 @@ public class Main {
             for (int i = 0; i < CUBESIZE; i++) {
                 System.out.print("  ");
                 for (int j = 0; j < CUBESIZE; j++) {
-                    System.out.print(f.get(i, j).getPieceNumber() + " ");
+                    System.out.print(f.get(i, j).getPieceColor() + " ");
                 }
                 System.out.println();
             }
@@ -24,87 +24,122 @@ public class Main {
     }
 
     public static Cube setUp() {
-        Corner GWR = new Corner(2, 1, Color.GREEN, Color.WHITE, Color.RED);
-        Corner GYR = new Corner(5, 2, Color.GREEN, Color.YELLOW, Color.RED);
-        Corner GYO = new Corner(7, 3, Color.GREEN, Color.YELLOW, Color.ORANGE);
-        Corner GWO = new Corner(11, 4, Color.GREEN, Color.WHITE, Color.ORANGE);
+        int[] primes = {131, 19, 107, 101, 149, 13, 23, 103, 151, 163, 109, 173, 59, 191, 79,
+            7, 17, 3, 211, 41, 167, 137, 199, 181, 197, 89, 5, 113, 47, 139, 43, 67, 71, 193, 29,
+            61, 83, 157, 11, 179, 73, 53, 31, 223, 127, 2, 97, 37};
 
-        Corner BWO = new Corner(79, 5, Color.BLUE, Color.WHITE, Color.ORANGE);
-        Corner BYO = new Corner(73, 6, Color.BLUE, Color.YELLOW, Color.ORANGE);
-        Corner BWR = new Corner(71, 7, Color.BLUE, Color.WHITE, Color.RED);
-        Corner BYR = new Corner(17, 8, Color.BLUE, Color.YELLOW, Color.RED);
+        CubePiece[][] greenSide = new CubePiece[CUBESIZE][CUBESIZE];
+        CubePiece[][] whiteSide = new CubePiece[CUBESIZE][CUBESIZE];
+        CubePiece[][] orangeSide = new CubePiece[CUBESIZE][CUBESIZE];
+        CubePiece[][] redSide = new CubePiece[CUBESIZE][CUBESIZE];
+        CubePiece[][] blueSide = new CubePiece[CUBESIZE][CUBESIZE];
+        CubePiece[][] yellowSide = new CubePiece[CUBESIZE][CUBESIZE];
 
-        Edge GW = new Edge(31, 9, Color.GREEN, Color.WHITE);
-        Edge GR = new Edge(41, 10, Color.GREEN, Color.RED);
-        Edge GY = new Edge(53, 11, Color.GREEN, Color.YELLOW);
-        Edge GO = new Edge(229, 12, Color.GREEN, Color.ORANGE);
+        int n = 0;
+        int k = 0;
+        for (int i = 0; i < CUBESIZE; i++) {
+            for (int j = 0; j < CUBESIZE; j++) {
+                CubePiece piece;
+                if (j == 1 && i == 1) {
+                    piece = new CubePiece(0, n, Color.GREEN);
+                } else {
+                    piece = new CubePiece(primes[k], n, Color.GREEN);
+                    k++;
+                }
 
-        Edge BW = new Edge(199, 13, Color.BLUE, Color.WHITE);
-        Edge BO = new Edge(139, 14, Color.BLUE, Color.ORANGE);
-        Edge BY = new Edge(151, 15, Color.BLUE, Color.YELLOW);
-        Edge BR = new Edge(109, 16, Color.BLUE, Color.RED);
+                greenSide[i][j] = piece;
+                n++;
+            }
 
-        Edge RW = new Edge(127, 17, Color.RED, Color.WHITE);
-        Edge RY = new Edge(167, 18, Color.RED, Color.YELLOW);
+        }
 
-        Edge OW = new Edge(67, 19, Color.ORANGE, Color.WHITE);
-        Edge OY = new Edge(189, 20, Color.ORANGE, Color.YELLOW);
+        for (int i = 0; i < CUBESIZE; i++) {
+            for (int j = 0; j < CUBESIZE; j++) {
+                CubePiece piece;
+                if (j == 1 && i == 1) {
+                    piece = new CubePiece(0, n, Color.RED);
+                } else {
+                    piece = new CubePiece(primes[k], n, Color.RED);
+                    k++;
+                }
 
-        Center W = new Center(0, 21, Color.WHITE);
-        Center G = new Center(0, 22, Color.GREEN);
-        Center R = new Center(0, 23, Color.RED);
-        Center O = new Center(0, 24, Color.ORANGE);
-        Center B = new Center(0, 25, Color.BLUE);
-        Center Y = new Center(0, 26, Color.YELLOW);
+                redSide[i][j] = piece;
+                n++;
+            }
+        }
 
-        CubePiece[][] greenFace = {
-            {GWO, GW, GWR},
-            {GO, G, GR},
-            {GYO, GY, GYR}
-        };
-        CubeFace green = new CubeFace(greenFace, Color.GREEN);
+        for (int i = 0; i < CUBESIZE; i++) {
+            for (int j = 0; j < CUBESIZE; j++) {
+                CubePiece piece;
+                if (j == 1 && i == 1) {
+                    piece = new CubePiece(0, n, Color.BLUE);
+                } else {
+                    piece = new CubePiece(primes[k], n, Color.BLUE);
+                    k++;
+                }
 
-        CubePiece[][] redFace = {
-            {GWR, RW, BWR},
-            {GR, R, BR},
-            {GYR, RY, BYR}
-        };
-        CubeFace red = new CubeFace(redFace, Color.RED);
+                blueSide[i][j] = piece;
+                n++;
+            }
+        }
 
-        CubePiece[][] blueFace = {
-            {BYO, BY, BYR},
-            {BO, B, BR},
-            {BWO, BW, BWR}
-        };
-        CubeFace blue = new CubeFace(blueFace, Color.BLUE);
+        for (int i = 0; i < CUBESIZE; i++) {
+            for (int j = 0; j < CUBESIZE; j++) {
+                CubePiece piece;
+                if (j == 1 && i == 1) {
+                    piece = new CubePiece(0, n, Color.ORANGE);
+                } else {
+                    piece = new CubePiece(primes[k], n, Color.ORANGE);
+                    k++;
+                }
 
-        CubePiece[][] orangeFace = {
-            {BWO, OW, GWO},
-            {BO, O, GO},
-            {BYO, OY, GYO}
-        };
-        CubeFace orange = new CubeFace(orangeFace, Color.ORANGE);
+                orangeSide[i][j] = piece;
+                n++;
+            }
+        }
 
-        CubePiece[][] whiteFace = {
-            {BWO, BW, BWR},
-            {OW, W, RW},
-            {GWO, GW, GWR}
-        };
+        for (int i = 0; i < CUBESIZE; i++) {
+            for (int j = 0; j < CUBESIZE; j++) {
+                CubePiece piece;
+                if (j == 1 && i == 1) {
+                    piece = new CubePiece(0, n, Color.WHITE);
+                } else {
+                    piece = new CubePiece(primes[k], n, Color.WHITE);
+                    k++;
+                }
 
-        CubeFace white = new CubeFace(whiteFace, Color.WHITE);
+                whiteSide[i][j] = piece;
+                n++;
+            }
+        }
 
-        CubePiece[][] yellowFace = {
-            {GYO, GY, GYR},
-            {OY, Y, RY},
-            {BYO, BY, BYR}
-        };
+        for (int i = 0; i < CUBESIZE; i++) {
+            for (int j = 0; j < CUBESIZE; j++) {
+                CubePiece piece;
+                if (j == 1 && i == 1) {
+                    piece = new CubePiece(0, n, Color.YELLOW);
+                } else {
+                    piece = new CubePiece(primes[k], n, Color.YELLOW);
+                    k++;
+                }
 
-        CubeFace yellow = new CubeFace(yellowFace, Color.YELLOW);
+                yellowSide[i][j] = piece;
+                n++;
+            }
+        }
+
+        CubeFace white = new CubeFace(whiteSide, Color.WHITE);
+        CubeFace green = new CubeFace(greenSide, Color.GREEN);
+        CubeFace orange = new CubeFace(orangeSide, Color.ORANGE);
+        CubeFace red = new CubeFace(redSide, Color.RED);
+        CubeFace blue = new CubeFace(blueSide, Color.BLUE);
+        CubeFace yellow = new CubeFace(yellowSide, Color.YELLOW);
 
         CubeFace[] sides = {green, red, blue, orange, white, yellow};
-        Cube cube = new Cube(sides);
 
+        Cube cube = new Cube(sides);
         return cube;
+
     }
 
     public static void duplicateChecker(Cube cube) {
@@ -168,9 +203,8 @@ public class Main {
         Cube cube = setUp(); //Sets up cube using 6 3x3 matricies with set piece numbers and weights
 
         //printCube(cube); //Prints the unscrambled cube represented with piece numbers
-        //demo(cube); //Will generate one scramble, then print it and print the scrambed cube
-        duplicateChecker(cube); //Will check for duplicate scrambles and tokens based on a set number of iterations
-
+        demo(cube); //Will generate one scramble, then print it and print the scrambed cube
+        //duplicateChecker(cube); //Will check for duplicate scrambles and tokens based on a set number of iterations
         //demoToken(cube); //will print one token generated from the cube
     }
 }
