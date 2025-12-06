@@ -335,7 +335,7 @@ public class Cube {
 
         ArrayList<String> scramble = new ArrayList<>();
 
-        String last_move = "";
+        String last_move = "move";
 
         for (int i = 0; i < SCRAMBLELENGTH; i++) {
             String move = "";
@@ -345,7 +345,7 @@ public class Cube {
                 move = MOVES[idx];
             } while (move.equals(last_move));
 
-            if (!move.equals(last_move)) {
+            if (move.charAt(0) != last_move.charAt(0)) {
                 scramble.add(move);
                 last_move = move;
             }

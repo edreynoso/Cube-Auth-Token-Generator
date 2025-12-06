@@ -16,7 +16,7 @@ public class CubeFace {
 
         for (int i = 0; i < CUBESIZE; i++) {
             for (int j = 0; j < CUBESIZE; j++) {
-                int x = this.face[i][j].getWeight() * this.face[i][j].getPieceNumber();
+                int x = this.face[i][j].getWeight() + this.face[i][j].getPieceNumber();
                 s.append(x).append(",");
             }
         }
@@ -29,7 +29,7 @@ public class CubeFace {
     }
 
     public CubePiece get(int r, int c) {
-        return face[r][c];
+        return this.face[r][c];
     }
 
     public CubePiece[] getRow(int r) {
@@ -64,9 +64,9 @@ public class CubeFace {
 
     public void rotateCW() {
         CubePiece[][] temp = new CubePiece[CUBESIZE][CUBESIZE];
-        for (int r = 0; r < CUBESIZE; r++) {
-            for (int c = 0; c < CUBESIZE; c++) {
-                temp[c][2 - r] = face[r][c];
+        for (int i = 0; i < CUBESIZE; i++) {
+            for (int j = 0; j < CUBESIZE; j++) {
+                temp[j][2 - i] = face[i][j];
             }
         }
         face = temp;

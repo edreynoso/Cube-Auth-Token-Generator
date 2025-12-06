@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Main {
 
-    public static final int SCRAMBLE_COUNT = 3000000;
+    public static final int SCRAMBLE_COUNT = 10000000;
 
     public static final int CUBESIZE = 3;
 
@@ -178,6 +178,7 @@ public class Main {
         System.out.println("In " + SCRAMBLE_COUNT + " different tokens generated, there was "
                 + duplicateTokens + " duplicate tokens");
         System.out.println("The duplicate tokens found are: " + dTokens);
+
     }
 
     public static void demo(Cube cube) {
@@ -202,9 +203,10 @@ public class Main {
 
         Cube cube = setUp(); //Sets up cube using 6 3x3 matricies with set piece numbers and weights
 
-        //printCube(cube); //Prints the unscrambled cube represented with piece numbers
+        printCube(cube); //Prints the unscrambled cube represented with piece numbers
         demo(cube); //Will generate one scramble, then print it and print the scrambed cube
-        //duplicateChecker(cube); //Will check for duplicate scrambles and tokens based on a set number of iterations
-        //demoToken(cube); //will print one token generated from the cube
+        duplicateChecker(cube); //Will check for duplicate scrambles and tokens based on a set number of iterations
+        demoToken(cube); //will print one token generated from the cube
+
     }
 }
