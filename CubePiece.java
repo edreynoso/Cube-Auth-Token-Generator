@@ -11,8 +11,6 @@ public class CubePiece {
 
     public static final int CUBESIZE = 3;
 
-    //Colors will be a list for simplicity as corners and edges have multiple colors 
-    //This is for simplicity and also for face lookup    
     public CubePiece(int weight, int pieceNumber, Color pieceColor) {
         this.pieceColor = pieceColor;
         this.weight = weight;
