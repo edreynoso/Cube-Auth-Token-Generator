@@ -1,4 +1,3 @@
-
 public class CubePiece {
 
     private final int weight;
