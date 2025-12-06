@@ -1,10 +1,8 @@
 
 public class CubePiece {
 
-    // Certain pieces in cube carry different weights
     private final int weight;
 
-    // Pieces will have unique piece numbers
     private final int pieceNumber;
 
     private final Color pieceColor;
